@@ -1,9 +1,10 @@
 import { Router } from "express";
+import { loginController } from "../useCases/login";
 
 const login = Router();
 
-login.get("/", (req, res) => {
-	res.json({ message: "Hello, login!" });
+login.post("/", (req, res) => {
+	loginController.handle(req, res);
 });
 
 export { login };

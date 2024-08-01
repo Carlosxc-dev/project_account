@@ -1,31 +1,19 @@
 import { Request, Response } from "express";
 import prisma from "../../utils/prisma";
-
-interface IcreateRegister {
-	name: string;
-	userName: string;
-	password: number;
-}
+import { RegisterRepository } from "../../repository/RegisterRepository";
+import { IRegisterDTO } from "../../repository/IRegister";
 
 class CreateRegisterUseCase {
-	public async execute({ name, userName, password }: IcreateRegister): Promise<any> {
-		const alreadyExists = await prisma.account.findUnique({
-			where: {
-				userName: userName,
-			},
-		});
+	constructor(private registerRepository: RegisterRepository) {}
 
-		if (alreadyExists) {
+	public async execute(param: IRegisterDTO) {
+		const data = await this.registerRepository.findbyusername(param);
+
+		if (data) {
 			throw new Error("User already exists");
 		}
 
-		const dataUser = await prisma.account.create({
-			data: {
-				name: name,
-				userName: userName,
-				password: password,
-			},
-		});
+		const dataUser = await this.registerRepository.createRegister(param);
 
 		return dataUser;
 	}

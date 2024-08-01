@@ -19,7 +19,7 @@ class CreateRegisterController {
 			this.createRegisterUseCase
 				.execute(parseData)
 				.then((data) => {
-					return res.status(201).json(data);
+					return res.status(201).json({ message: "user made sucess !!", data: data });
 				})
 				.catch((err) => {
 					return res.status(400).json({ message: err.message });
