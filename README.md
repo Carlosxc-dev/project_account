@@ -22,7 +22,7 @@
 </p>
 
 <p align="center">
-  <b>Simple description of what your project do or how to use it.</b>
+  <b>This project aims to provide a foundational understanding of CRUD operations in web development, making it a perfect starting point for beginners or as a reference for more complex applications..</b>
 </p>
 
 <h2 id="started">🚀 Getting started</h2>
@@ -59,8 +59,17 @@ SERVER_PORT = {port}
 
 How to start your project
 
+Em uma aba do terminal executar:
+
 ```bash
-cd project_account
+cd project_account/backend
+npm run dev
+```
+
+Em outra aba do terminal executar:
+
+```bash
+cd project_account/frontend
 npm run dev
 ```
 
@@ -70,29 +79,32 @@ Here you can list the main routes of your API, and what are their expected reque
 ​
 | route | description  
 |----------------------|-----------------------------------------------------
-| <kbd>GET /authenticate</kbd> | retrieves user info see [response details](#get-auth-detail)
-| <kbd>POST /authenticate</kbd> | authenticate user into the api see [request details](#post-auth-detail)
+| <kbd>GET /register</kbd> | list all users oh the database [response details](#get-auth-detail)
+| <kbd>POST /resgister</kbd> | add new users [request details](#post-auth-detail)
+<kbd>PUT /register</kbd> | update a users existing [request details](#put)
+<kbd>DELETE /register</kbd> | delete users logged [request details](#delete)
 
-<h3 id="get-auth-detail">GET /authenticate</h3>
+<h3 id="get-auth-detail">GET /register</h3>
 
 **RESPONSE**
 
 ```json
 {
   "name": "Fernanda Kipper",
-  "age": 20,
-  "email": "her-email@gmail.com"
+  "userName": "fer",
+  "password": 123
 }
 ```
 
-<h3 id="post-auth-detail">POST /authenticate</h3>
+<h3 id="post-auth-detail">POST /register</h3>
 
 **REQUEST**
 
 ```json
 {
-  "username": "fernandakipper",
-  "password": "4444444"
+  "name": "Fernanda Kipper",
+  "userName": "fer",
+  "password": 123
 }
 ```
 
@@ -100,7 +112,61 @@ Here you can list the main routes of your API, and what are their expected reque
 
 ```json
 {
-  "token": "OwoMRHsaQwyAgVoc3OXmL1JhMVUYXGGBbCTK0GBgiYitwQwjf0gVoBmkbuyy0pSi"
+  "message": "user register sucess",
+  "data": {
+    "name": "Fernanda Kipper",
+    "userName": "fer",
+    "password": 123
+  }
+}
+```
+
+<h3 id="put">PUT /register</h3>
+
+**REQUEST**
+
+```json
+{
+  "name": "Fernanda Kipper",
+  "userName": "fer",
+  "password": 123
+}
+```
+
+**RESPONSE**
+
+```json
+{
+  "message": "user update sucess",
+  "data": {
+    "name": "Fernanda Kipper",
+    "userName": "fer",
+    "password": 123
+  }
+}
+```
+
+<h3 id="delete">DELETE /register</h3>
+
+**REQUEST**
+
+```json
+{
+  "userName": "gui"
+}
+```
+
+**RESPONSE**
+
+```json
+{
+  "message": "user delete sucess!!",
+  "user": {
+    "id": 14,
+    "name": "guilherme",
+    "userName": "gui",
+    "password": 123
+  }
 }
 ```
 
