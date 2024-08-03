@@ -67,6 +67,7 @@ Em uma aba do terminal executar:
 
 ```bash
 cd project_account/backend
+npm install .
 npm run dev
 ```
 
@@ -74,8 +75,10 @@ Em outra aba do terminal executar:
 
 ```bash
 cd project_account/frontend
+npm install .
 npm run dev
 ```
+Apos os passos acima abra o navegador em http://localhost:5173/
 
 <h2 id="routes">📍 API Endpoints</h2>
 
