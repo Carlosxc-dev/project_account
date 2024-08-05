@@ -37,16 +37,27 @@ export const Form = styled.form`
   input {
     margin-top: 0.5rem;
     padding: 0.5rem;
-    border: 2px solid ${(props) => props.theme.colors.border};
+    border: 1px solid ${(props) => props.theme.colors.text};
     border-radius: 8px;
     ::placeholder {
       color: ${(props) => props.theme.colors.color};
     }
 
-    :focus {
-      outline: outset;
-      border-color: ${(props) => props.theme.colors.primary};
+    :invalid {
+      border-color: red;
     }
+
+    :valid {
+      border-color: green;
+    }
+
+    :required {
+      border-color: blue;
+    }
+  }
+
+  input[type="text"]:focus {
+    border: 2px solid ${(props) => props.theme.colors.primary};
   }
 
   button {

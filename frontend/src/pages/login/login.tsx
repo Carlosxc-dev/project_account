@@ -7,7 +7,7 @@ interface Idata {
   password: string;
 }
 
-export default function Register() {
+export default function login() {
   const nameRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -38,21 +38,20 @@ export default function Register() {
         console.error(err);
       });
   };
-
   return (
     <Conteiner>
-      <h1>Create an account</h1>
-      <Form onSubmit={handleSubmit}>
-        <label>Name</label>
-        <input type="text" placeholder="Name" ref={nameRef} />
-        <label>UserName</label>
+      <h1>Login to your account</h1>
+      <Form action="">
+        <label htmlFor="">UserName</label>
         <input type="text" placeholder="UserName" ref={usernameRef} />
-        <label>Password</label>
+        <label htmlFor="">Password</label>
         <input type="password" placeholder="Password" ref={passwordRef} />
-        <button type="submit">Create Account</button>
+        <button type="submit" onClick={handleSubmit}>
+          Login now
+        </button>
       </Form>
       <span>
-        Already have an account? <a href="">Log in</a>
+        Don't have an account?? <a href="">Sign Up</a>
       </span>
     </Conteiner>
   );
