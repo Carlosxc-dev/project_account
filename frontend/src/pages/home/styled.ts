@@ -12,6 +12,17 @@ export const Conteiner = styled.div`
     margin-bottom: 1rem;
   }
 
+  .btn {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: ${(props) => props.theme.colors.secundary};
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    width: 200px;
+  }
+
   span {
     margin-top: 1rem;
     color: ${(props) => props.theme.colors.text};

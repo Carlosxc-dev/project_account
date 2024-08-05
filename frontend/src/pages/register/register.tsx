@@ -1,6 +1,6 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Conteiner, Form } from "./styled";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Home from "../home/home";
 
@@ -14,8 +14,10 @@ export default function Register() {
   const nameRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const navegate = useNavigate();
+  const [msg, setMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const data: Idata = {
@@ -26,7 +28,7 @@ export default function Register() {
 
     console.log(data);
 
-    fetch("http://localhost:8080/register", {
+    await fetch("http://localhost:8000/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,9 +37,11 @@ export default function Register() {
     })
       .then((res) => res.json())
       .then((res) => {
+        if (res.message == "User already exists") {
+          return setMsg(res.message);
+        }
         console.log(res);
-
-        return <Home />;
+        navegate("/");
       })
       .catch((err) => {
         console.error(err);
@@ -47,6 +51,7 @@ export default function Register() {
   return (
     <Conteiner>
       <h1>Create an account</h1>
+      <h2>{msg}</h2>
       <Form onSubmit={handleSubmit}>
         <label>Name</label>
         <input type="text" placeholder="Name" ref={nameRef} />
@@ -57,7 +62,7 @@ export default function Register() {
         <button type="submit">Create Account</button>
       </Form>
       <span>
-        Already have an account? <Link to="/login">Sing Up</Link>
+        Already have an account? <Link to="/">Sing Up</Link>
       </span>
     </Conteiner>
   );

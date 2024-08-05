@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Conteiner, Form } from "./styled";
 import { Link } from "react-router-dom";
-import Home from "../home/home";
+import { useNavigate } from "react-router-dom";
 
 interface Idata {
   name: string;
@@ -9,13 +9,14 @@ interface Idata {
   password: string;
 }
 
-export default function login() {
+export default function Login() {
   const nameRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const [loged, setLoged] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const data: Idata = {
@@ -24,40 +25,50 @@ export default function login() {
       password: passwordRef.current?.value || "",
     };
 
-    console.log(data);
-
-    fetch("http://localhost:8080/login", {
+    await fetch("http://localhost:8000/login", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-        setLoged(true);
+        if (res.ok) {
+          navigate("/home"); // Redireciona para a página inicial        }else{
+        } else {
+          setErr("Usuário ou senha não encontrados.");
+        }
       })
-      .catch((err) => {
-        console.error(err);
+      .catch((error) => {
+        setErr("Erro de rede. Verifique sua conexão e tente novamente.");
+        console.error(error);
       });
   };
-  return loged ? (
-    <Home />
-  ) : (
+
+  return (
     <Conteiner>
       <h1>Login to your account</h1>
-      <Form action="">
-        <label htmlFor="">UserName</label>
-        <input type="text" placeholder="UserName" ref={usernameRef} />
-        <label htmlFor="">Password</label>
-        <input type="password" placeholder="Password" ref={passwordRef} />
-        <button type="submit" onClick={handleSubmit}>
-          Login now
-        </button>
+      {err && <h2 style={{ color: "red" }}>{err}</h2>}
+      <Form onSubmit={handleSubmit}>
+        <label htmlFor="username">UserName</label>
+        <input
+          type="text"
+          id="username"
+          placeholder="UserName"
+          ref={usernameRef}
+        />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          ref={passwordRef}
+        />
+        <button type="submit">Login now</button>
       </Form>
       <span>
-        Don't have an account?? <Link to="/">create</Link>
+        Don't have an account? <Link to="/register">Create one</Link>
       </span>
     </Conteiner>
   );

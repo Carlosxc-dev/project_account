@@ -1,8 +1,12 @@
 import { LoginUseCase } from "./loginUseCase";
 import { Request, Response } from "express";
+import { Auth } from "../../routes/auth.routes";
 
 class LoginController {
-	constructor(private loginUseCase: LoginUseCase) {}
+	private auth: Auth;
+	constructor(private loginUseCase: LoginUseCase) {
+		this.auth = new Auth();
+	}
 
 	public async handle(req: Request, res: Response) {
 		const data = req.body;
@@ -15,15 +19,22 @@ class LoginController {
 						message: "user nao encontrado",
 					});
 				}
-				return res.status(201).send({
-					message: "usuario logado com sucesso",
-					data: response,
+
+				const token = this.auth.generateToken(response.userName);
+
+				res.cookie("token", token, {
+					httpOnly: true, // somente http
+					secure: false, // Use apenas em HTTPS
+					sameSite: "strict", // Protege contra CSRF
 				});
+
+				return res.status(200).send({ message: "login completo -- cookie com jwt", ok: true });
 			})
 			.catch((err) => {
-				throw new Error("seu erro ");
+				throw new Error("erro de autenticacao no server", err);
 			});
 	}
 }
 
 export { LoginController };
+
