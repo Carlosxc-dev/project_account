@@ -1,9 +1,12 @@
 import { useRef } from "react";
 import { Conteiner, Form } from "./styled";
+import { Link } from "react-router-dom";
+
+import Home from "../home/home";
 
 interface Idata {
   name: string;
-  username: string;
+  userName: string;
   password: string;
 }
 
@@ -17,7 +20,7 @@ export default function Register() {
 
     const data: Idata = {
       name: nameRef.current?.value || "",
-      username: usernameRef.current?.value || "",
+      userName: usernameRef.current?.value || "",
       password: passwordRef.current?.value || "",
     };
 
@@ -33,6 +36,8 @@ export default function Register() {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
+
+        return <Home />;
       })
       .catch((err) => {
         console.error(err);
@@ -52,7 +57,7 @@ export default function Register() {
         <button type="submit">Create Account</button>
       </Form>
       <span>
-        Already have an account? <a href="">Log in</a>
+        Already have an account? <Link to="/login">Sing Up</Link>
       </span>
     </Conteiner>
   );

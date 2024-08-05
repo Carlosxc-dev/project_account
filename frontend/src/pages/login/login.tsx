@@ -1,9 +1,11 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Conteiner, Form } from "./styled";
+import { Link } from "react-router-dom";
+import Home from "../home/home";
 
 interface Idata {
   name: string;
-  username: string;
+  userName: string;
   password: string;
 }
 
@@ -11,19 +13,20 @@ export default function login() {
   const nameRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const [loged, setLoged] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const data: Idata = {
       name: nameRef.current?.value || "",
-      username: usernameRef.current?.value || "",
+      userName: usernameRef.current?.value || "",
       password: passwordRef.current?.value || "",
     };
 
     console.log(data);
 
-    fetch("http://localhost:8080/register", {
+    fetch("http://localhost:8080/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,12 +36,15 @@ export default function login() {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
+        setLoged(true);
       })
       .catch((err) => {
         console.error(err);
       });
   };
-  return (
+  return loged ? (
+    <Home />
+  ) : (
     <Conteiner>
       <h1>Login to your account</h1>
       <Form action="">
@@ -51,7 +57,7 @@ export default function login() {
         </button>
       </Form>
       <span>
-        Don't have an account?? <a href="">Sign Up</a>
+        Don't have an account?? <Link to="/">create</Link>
       </span>
     </Conteiner>
   );

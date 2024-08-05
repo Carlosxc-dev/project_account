@@ -21,10 +21,9 @@ class LoginController {
 				});
 			})
 			.catch((err) => {
-				throw new Error();
+				throw new Error("seu erro ");
 			});
 	}
 }
 
 export { LoginController };
-
