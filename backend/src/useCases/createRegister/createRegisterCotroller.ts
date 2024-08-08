@@ -14,7 +14,6 @@ class CreateRegisterController {
 	public handle(req: Request, res: Response) {
 		try {
 			const data = req.body;
-			data.password = parseInt(data.password);
 			const parseData = createRegisterSchema.parse(data);
 
 			this.createRegisterUseCase
@@ -37,3 +36,4 @@ class CreateRegisterController {
 }
 
 export { CreateRegisterController };
+

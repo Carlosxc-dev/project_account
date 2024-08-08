@@ -26,9 +26,10 @@ class LoginController {
 					httpOnly: true, // somente http
 					secure: false, // Use apenas em HTTPS
 					sameSite: "strict", // Protege contra CSRF
+					maxAge: 1000 * 60, // 1 minuto
 				});
 
-				return res.status(200).send({ message: "login completo -- cookie com jwt", ok: true });
+				return res.status(200).send({ message: "login completo -- cookie com jwt", ok: true, data: response });
 			})
 			.catch((err) => {
 				throw new Error("erro de autenticacao no server", err);

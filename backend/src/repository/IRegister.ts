@@ -2,7 +2,7 @@ interface IRegisterDTO {
 	id?: number;
 	name: string;
 	userName: string;
-	password: number;
+	password: string;
 }
 
 interface IRegister {

@@ -1,56 +1,28 @@
-import { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Conteiner, Form } from "./styled";
 import { Link, useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../../context/msg";
 
-import Home from "../home/home";
-
-interface Idata {
-  name: string;
-  userName: string;
-  password: string;
-}
+import { CreateUsers } from "../../services/createUsers";
 
 export default function Register() {
   const nameRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const { msg, setMsg } = useGlobalContext();
   const navegate = useNavigate();
-  const [msg, setMsg] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-
-    const data: Idata = {
+    const data = {
       name: nameRef.current?.value || "",
       userName: usernameRef.current?.value || "",
       password: passwordRef.current?.value || "",
     };
-
     console.log(data);
-
-    await fetch("http://localhost:8080/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.message == "User already exists") {
-          return setMsg(res.message);
-        }
-        if (res.erros) {
-          return setMsg(res.erros[0].message);
-        }
-        console.log(res);
-        navegate("/");
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
+    await CreateUsers(data, setMsg);
+    navegate("/");
+  }
   return (
     <Conteiner>
       <div className="content">

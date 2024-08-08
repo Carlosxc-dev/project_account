@@ -1,49 +1,32 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Conteiner, Form } from "./styled";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
-interface Idata {
-  name: string;
-  userName: string;
-  password: string;
-}
+import { login } from "../../services/login";
+import { IData } from "../../interfaces/IData";
+import { useGlobalContext } from "../../context/msg";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Login() {
   const nameRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const [err, setErr] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { msg, setMsg, setUser } = useGlobalContext();
+  const { islogin } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const data: Idata = {
+    const data: IData = {
       name: nameRef.current?.value || "",
       userName: usernameRef.current?.value || "",
       password: passwordRef.current?.value || "",
     };
 
-    await fetch("http://localhost:8080/login", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => {
-        if (res.ok) {
-          navigate("/home"); // Redireciona para a página inicial        }else{
-        } else {
-          setErr("Usuário ou senha não encontrados");
-        }
-      })
-      .catch((error) => {
-        setErr("Erro de rede. Verifique sua conexão e tente novamente.");
-        console.error(error);
-      });
+    login(data, setMsg, setUser);
+    islogin();
+    navigate("/home"); // Redireciona para a página inicial        }else{
   };
 
   return (
@@ -67,7 +50,7 @@ export default function Login() {
             placeholder="Password"
             ref={passwordRef}
           />
-          {err && <p className="erro">{err}</p>}
+          {<p className="erro">{msg}</p>}
           <button type="submit">LOG IN</button>
         </Form>
         <span>
