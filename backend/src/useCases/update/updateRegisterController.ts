@@ -7,6 +7,9 @@ class UpdateRegisterController {
 	public async handle(req: Request, res: Response) {
 		const data = req.body;
 
+		data.password = parseInt(data.password); //muda de string para inteiro
+		console.log(data);
+
 		await this.updateRegisterUseCase
 			.execute(data)
 			.then((response) => {
@@ -16,10 +19,12 @@ class UpdateRegisterController {
 				});
 			})
 			.catch((err) => {
-				throw new Error(err);
+				return res.status(400).send({
+					message: "erro no servidor",
+					data: err,
+				});
 			});
 	}
 }
 
 export { UpdateRegisterController };
-

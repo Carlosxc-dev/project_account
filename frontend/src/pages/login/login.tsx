@@ -25,7 +25,7 @@ export default function Login() {
       password: passwordRef.current?.value || "",
     };
 
-    await fetch("http://localhost:8000/login", {
+    await fetch("http://localhost:8080/login", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -37,7 +37,7 @@ export default function Login() {
         if (res.ok) {
           navigate("/home"); // Redireciona para a página inicial        }else{
         } else {
-          setErr("Usuário ou senha não encontrados.");
+          setErr("Usuário ou senha não encontrados");
         }
       })
       .catch((error) => {
@@ -48,28 +48,32 @@ export default function Login() {
 
   return (
     <Conteiner>
-      <h1>Login to your account</h1>
-      {err && <h2 style={{ color: "red" }}>{err}</h2>}
-      <Form onSubmit={handleSubmit}>
-        <label htmlFor="username">UserName</label>
-        <input
-          type="text"
-          id="username"
-          placeholder="UserName"
-          ref={usernameRef}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          placeholder="Password"
-          ref={passwordRef}
-        />
-        <button type="submit">Login now</button>
-      </Form>
-      <span>
-        Don't have an account? <Link to="/register">Create one</Link>
-      </span>
+      <div className="content">
+        <h1>| Moneylender</h1>
+        <h3>SIGN IN</h3>
+        <p>Enter your credentials to access your account</p>
+        <Form onSubmit={handleSubmit}>
+          <label htmlFor="username">Email:</label>
+          <input
+            type="text"
+            id="username"
+            placeholder="Email"
+            ref={usernameRef}
+          />
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            ref={passwordRef}
+          />
+          {err && <p className="erro">{err}</p>}
+          <button type="submit">LOG IN</button>
+        </Form>
+        <span>
+          Don't have an account? <Link to="/register">Log In</Link>
+        </span>
+      </div>
     </Conteiner>
   );
 }

@@ -2,19 +2,28 @@ export default {
   title: "light",
 
   colors: {
-    primary: "#1570ef",
-    secundary: "#000",
-    text: "#98a2b3",
-    border: "#d1e9ff",
+    primary: "#7C2874",
+    secundary: "#493446",
+    h1: "#A700D0",
+    h3: "#A700D0",
+    p: "#6C6C6C",
+    label: "#6C6C6C",
+    border: "#E5E5E5",
+    background_button: "#A700D0",
+    erro: "#FF0000",
+    placeholder: "#CDCDCD",
+    bar: "ACACAC",
   },
 
   fonts: {
-    card_title_size: "20px",
-    card_button_size: "15px",
-    options_size: "15px",
-    card_title_font: "Doppio One",
-    card_button_font: "Dosis",
-    options_font: "Inter",
+    h1: "32px",
+    h3: "22px",
+    p: "14px",
+    Montserrat: "Montserrat",
+    bold: 700,
+    semibold: 600,
+    regular: 400,
+    erro: "14px",
   },
 
   screens: {
