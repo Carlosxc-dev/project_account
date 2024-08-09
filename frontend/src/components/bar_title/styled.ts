@@ -37,15 +37,6 @@ export const Bar_title = styled.div`
     background-color: ${(props) => props.theme.colors.label};
   }
 
-  .bar_info {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    color: ${(props) => props.theme.colors.label};
-  }
-
   .bar_info > p {
     font-size: ${(props) => props.theme.fonts.p};
     font-weight: ${(props) => props.theme.fonts.regular};

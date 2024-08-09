@@ -10,12 +10,6 @@ export default function card() {
       </div>
 
       <div className="line"></div>
-
-      <div className="bar_info">
-        <p>Nome</p>
-        <p>Data</p>
-        <p>Valor</p>
-      </div>
     </Bar_title>
   );
 }

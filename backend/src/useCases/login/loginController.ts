@@ -26,7 +26,7 @@ class LoginController {
 					httpOnly: true, // somente http
 					secure: false, // Use apenas em HTTPS
 					sameSite: "strict", // Protege contra CSRF
-					maxAge: 1000 * 60, // 1 minuto
+					maxAge: 1000 * 60 * 60, // 1 hora
 				});
 
 				return res.status(200).send({ message: "login completo -- cookie com jwt", ok: true, data: response });
@@ -38,4 +38,3 @@ class LoginController {
 }
 
 export { LoginController };
-

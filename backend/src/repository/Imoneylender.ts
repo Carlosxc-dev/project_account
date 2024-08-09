@@ -1,17 +1,16 @@
+import { MoneyRepository } from "./MoneyRepository";
+
 interface ImoneylenderDTO {
-	userId: number;
+	username: string;
 	valor: string;
 	option: string;
 	pago: string;
 }
 
 interface Imoneylender {
-	create(data: ImoneylenderDTO): Promise<any>;
-	list(): Promise<any>;
-	update(data: ImoneylenderDTO): Promise<any>;
-	delete(userName: string): Promise<ImoneylenderDTO>;
-	findbyusername(data: ImoneylenderDTO): Promise<any>;
+	findUser(username: string): Promise<any>;
+	createMoney(data: ImoneylenderDTO, userId: number): Promise<any>;
+	listMoney(): Promise<any>;
 }
 
 export { ImoneylenderDTO, Imoneylender };
-
