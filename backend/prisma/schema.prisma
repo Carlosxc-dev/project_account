@@ -10,20 +10,21 @@ datasource db {
 model account {
   id            Int             @id @default(autoincrement())
   name          String
-  userName      String          @unique
-  password      String          // Corrigido para String
+  email         String          @unique
+  password      String          
   moneylenders  moneylender[]   // Relação um-para-muitos
 }
 
 model moneylender {
-  id         Int       @id @default(autoincrement())
-  userId     Int       // Referência ao id do account
-  namee      account   @relation(fields: [userId], references: [id])
-  valor      String  
-  option     String
-  pago       String
+  id         Int       @id @default(autoincrement())   
+  id_account Int       // Referência ao id do account
+  autor      account   @relation(fields: [id_account], references: [id])
+  name       String
+  value      Int  
+  option     Boolean
+  pago       Boolean
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
 
-  @@index([userId])  // Adiciona um índice para a coluna userId
+  @@index([id_account])  // Adiciona um índice para a coluna userId
 }

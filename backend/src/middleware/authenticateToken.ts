@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import { Auth } from "../routes/auth.routes";
-import { log } from "console";
 
 class AuthenticateToken {
 	private auth: Auth;

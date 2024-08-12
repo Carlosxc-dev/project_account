@@ -1,15 +1,24 @@
 import { Router } from "express";
-import { createMoneyController } from "../useCases/createMoney/index";
-import { listMoneyController } from "../useCases/listMoney/index";
+import { listMoneyController } from "../modules/moneylender/useCase/listMoney/index";
+import { createMoneyController } from "../modules/moneylender/useCase/createMoney/index";
+import { updateMoneyController } from "../modules/moneylender/useCase/UpdateMoney/index";
+import { deleteMoneyController } from "../modules/moneylender/useCase/DeleteMoney/index";
 
 const home = Router();
 
-home.get("/", (req, res) => {
+home.post("/create", (req, res) => {
+	return createMoneyController.handle(req, res);
+});
+home.get("/list", (req, res) => {
 	return listMoneyController.handle(req, res);
 });
+home.put("/update", (req, res) => {
+	return updateMoneyController.handle(req, res);
+});
 
-home.post("/", (req, res) => {
-	return createMoneyController.handle(req, res);
+home.delete("/delete", (req, res) => {
+	return deleteMoneyController.handle(req, res);
 });
 
 export { home };
+

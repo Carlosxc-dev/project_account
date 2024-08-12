@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { createRegisterController } from "../useCases/createRegister/index";
-import { listRegisterController } from "../useCases/listRegister";
-import { deleteRegisterController } from "../useCases/deleteRegister";
-import { updateRegisterController } from "../useCases/update";
+import { createRegisterController } from "../modules/users/useCases/createRegister/index";
+import { listRegisterController } from "../modules/users/useCases/listRegister";
+import { deleteRegisterController } from "../modules/users/useCases/deleteRegister";
+import { updateRegisterController } from "../modules/users/useCases/update";
 
 const register = Router();
 
