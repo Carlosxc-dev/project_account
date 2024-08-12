@@ -1,4 +1,4 @@
-import { Imoneylender, ImoneylenderDTO } from "./Imoneylender";
+import { Imoneylender, ImoneylenderDTO } from "../interface/Imoneylender";
 import prisma from "../utils/prisma";
 
 class MoneyRepository implements Imoneylender {
@@ -22,7 +22,7 @@ class MoneyRepository implements Imoneylender {
 		});
 
 		if (!user) {
-			throw new Error("User not found");
+			throw new Error(`User not found ${username}`);
 		}
 
 		return user;
@@ -49,3 +49,4 @@ class MoneyRepository implements Imoneylender {
 }
 
 export { MoneyRepository };
+

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import prisma from "../../utils/prisma";
 import { RegisterRepository } from "../../repository/RegisterRepository";
-import { IRegisterDTO } from "../../repository/IRegister";
+import { IRegisterDTO } from "../../interface/IRegister";
 
 class CreateRegisterUseCase {
 	constructor(private registerRepository: RegisterRepository) {}

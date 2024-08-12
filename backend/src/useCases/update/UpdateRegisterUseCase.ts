@@ -1,4 +1,4 @@
-import { IRegisterDTO } from "../../repository/IRegister";
+import { IRegisterDTO } from "../../interface/IRegister";
 import { RegisterRepository } from "../../repository/RegisterRepository";
 
 class UpdateRegisterUseCase {

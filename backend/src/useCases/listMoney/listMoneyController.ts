@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ImoneylenderDTO } from "../../repository/Imoneylender";
+import { ImoneylenderDTO } from "../../interface/Imoneylender";
 import { ListMoneyUseCase } from "./listMoneyUseCase";
 
 class ListMoneyController {
@@ -24,3 +24,4 @@ class ListMoneyController {
 }
 
 export { ListMoneyController };
+

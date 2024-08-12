@@ -1,4 +1,4 @@
-import { MoneyRepository } from "./MoneyRepository";
+import { MoneyRepository } from "../repository/MoneyRepository";
 
 interface ImoneylenderDTO {
 	username: string;
@@ -14,3 +14,4 @@ interface Imoneylender {
 }
 
 export { ImoneylenderDTO, Imoneylender };
+

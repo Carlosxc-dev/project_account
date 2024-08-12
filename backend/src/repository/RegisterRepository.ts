@@ -1,4 +1,4 @@
-import { IRegister, IRegisterDTO } from "./IRegister";
+import { IRegister, IRegisterDTO } from "../interface/IRegister";
 import prisma from "../utils/prisma";
 
 class RegisterRepository implements IRegister {

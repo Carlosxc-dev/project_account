@@ -1,4 +1,4 @@
-import { IRegisterDTO } from "../../repository/IRegister";
+import { IRegisterDTO } from "../../interface/IRegister";
 import { DeleteRegisterUseCase } from "./deleteRegisterUseCase";
 import { Request, Response } from "express";
 
