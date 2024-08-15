@@ -1,4 +1,7 @@
 import express from "express";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "../swagger.json"; // Path to your JSON file
+
 import "dotenv/config";
 import { router } from "./routes";
 import { errorHandler } from "./middleware/errorHandler";
@@ -15,6 +18,7 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument)); // Adicione essa linha para servir a documentação Swagger UI na rota /api-docs
 
 app.use(router);
 
