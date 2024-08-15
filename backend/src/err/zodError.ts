@@ -1,9 +1,9 @@
 import { CustomError } from "../utils/CustomError";
 
-class AuthenticationError extends CustomError {
+class ZodError extends CustomError {
 	constructor(public message: string) {
 		super(message);
-		Object.setPrototypeOf(this, AuthenticationError.prototype);
+		Object.setPrototypeOf(this, ZodError.prototype);
 	}
 
 	statusCode = 401;
@@ -12,5 +12,5 @@ class AuthenticationError extends CustomError {
 	}
 }
 
-export { AuthenticationError };
+export { ZodError };
 

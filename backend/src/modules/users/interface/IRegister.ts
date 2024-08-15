@@ -13,7 +13,7 @@ interface IRegister {
 	list(data: IRegisterDTO): Promise<any>;
 	update(data: z.infer<typeof validationUpdateUserSchema>): Promise<any>;
 	delete(id: number): Promise<IRegisterDTO>;
-	findbyusername(data: IRegisterDTO): Promise<any>;
+	findbyusername(email: string): Promise<any>;
 }
 
 export { IRegisterDTO, IRegister };

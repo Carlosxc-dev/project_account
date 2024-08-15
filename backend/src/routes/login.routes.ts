@@ -3,8 +3,8 @@ import { loginController } from "../modules/users/useCases/login";
 
 const login = Router();
 
-login.post("/", (req, res) => {
-	loginController.handle(req, res);
+login.post("/", (req, res, next) => {
+	loginController.handle(req, res, next);
 });
 
 export { login };

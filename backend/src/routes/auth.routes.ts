@@ -9,13 +9,11 @@ class Auth {
 	}
 
 	public generateToken(userName: string): string {
-		return jwt.sign({ id: userName }, this.JWT_SECRET, { expiresIn: "1h" });
+		return jwt.sign({ id: userName }, this.JWT_SECRET, { expiresIn: "2m" });
 	}
 
 	public verifyToken(token: string): any {
 		try {
-			console.log(token);
-
 			return jwt.verify(token, this.JWT_SECRET);
 		} catch (erro) {
 			console.log(erro);

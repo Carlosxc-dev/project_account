@@ -21,10 +21,10 @@ class RegisterRepository implements IRegister {
 		return RegisterRepository.INSTANCE;
 	}
 
-	async findbyusername(data: z.infer<typeof validationLoginUserSchema>): Promise<IRegisterDTO | null> {
+	async findbyusername(email: string): Promise<IRegisterDTO | null> {
 		try {
 			return await prisma.account.findUnique({
-				where: { email: data.email },
+				where: { email: email },
 			});
 		} catch (err) {
 			if (err instanceof PrismaClientKnownRequestError) {

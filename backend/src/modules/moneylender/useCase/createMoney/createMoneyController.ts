@@ -1,9 +1,7 @@
-import { ImoneylenderDTO } from "../../interface/Imoneylender";
 import { CreateMoneyUseCase } from "./createMoneyUseCase";
 import { NextFunction, Request, Response } from "express";
 import { validationCreateMoneySchema } from "../../validation/validationMoney";
-import { z } from "zod";
-import { ResponseSuccess } from "../../../../utils/ResponseSuccess";
+import { ResponseSuccessMoney } from "../../../../utils/ResponseSuccessMoney";
 
 class CreateMoneyController {
 	constructor(private createMoneyUseCase: CreateMoneyUseCase) {}
@@ -13,7 +11,10 @@ class CreateMoneyController {
 			const data = req.body;
 			const parseData = validationCreateMoneySchema.parse(data);
 			const result = await this.createMoneyUseCase.execute(parseData);
-			res.status(200);
+			res.status(ResponseSuccessMoney.moneyCreated.statusCode).json({
+				message: ResponseSuccessMoney.moneyCreated.message,
+				data: result,
+			});
 		} catch (error) {
 			next(error);
 		}

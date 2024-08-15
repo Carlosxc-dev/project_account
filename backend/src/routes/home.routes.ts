@@ -6,18 +6,18 @@ import { deleteMoneyController } from "../modules/moneylender/useCase/DeleteMone
 
 const home = Router();
 
-home.post("/create", (req, res) => {
-	return createMoneyController.handle(req, res);
+home.post("/create", (req, res, next) => {
+	return createMoneyController.handle(req, res, next);
 });
-home.get("/list", (req, res) => {
-	return listMoneyController.handle(req, res);
+home.get("/list", (req, res, next) => {
+	return listMoneyController.handle(req, res, next);
 });
-home.put("/update", (req, res) => {
-	return updateMoneyController.handle(req, res);
+home.put("/update", (req, res, next) => {
+	return updateMoneyController.handle(req, res, next);
 });
 
-home.delete("/delete", (req, res) => {
-	return deleteMoneyController.handle(req, res);
+home.delete("/delete", (req, res, next) => {
+	return deleteMoneyController.handle(req, res, next);
 });
 
 export { home };

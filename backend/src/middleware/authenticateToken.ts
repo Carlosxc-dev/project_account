@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { Auth } from "../routes/auth.routes";
+import { AuthenticationError } from "../err/authenticateError";
 
 class AuthenticateToken {
 	private auth: Auth;
@@ -9,21 +10,23 @@ class AuthenticateToken {
 	}
 
 	public protected(req: Request, res: Response, next: NextFunction) {
-		const token = req.cookies.token;
+		try {
+			const token = req.cookies.token;
 
-		if (!token) {
-			return res.status(401).send("Authorization header is missing");
+			if (!token) {
+				throw new AuthenticationError("users not authorized");
+			}
+
+			const decoded = this.auth.verifyToken(token);
+
+			if (!decoded) {
+				throw new AuthenticationError("Invalid or expired token");
+			}
+
+			next();
+		} catch (error) {
+			next(error);
 		}
-
-		console.log(token);
-
-		const decoded = this.auth.verifyToken(token);
-
-		if (!decoded) {
-			return res.status(401).send("Invalid or expired token");
-		}
-
-		next();
 	}
 }
 

@@ -4,6 +4,7 @@ import { Auth } from "../../../../routes/auth.routes";
 import { validationLoginUserSchema } from "../../validation/validationUser";
 import { IRegisterDTO } from "../../interface/IRegister";
 import { ResponseSuccess } from "../../../../utils/ResponseSuccess";
+import { AuthenticationError } from "../../../../err/authenticateError";
 
 class LoginController {
 	private auth: Auth;
@@ -15,6 +16,14 @@ class LoginController {
 		try {
 			const data = req.body;
 			const parseData = validationLoginUserSchema.parse(data);
+
+			const hashedPassword = await this.loginUseCase.findHash(parseData.email);
+			const is_password = await this.auth.comparePassword(parseData.password, hashedPassword);
+
+			if (!is_password) {
+				throw new AuthenticationError("Password is incorrect");
+			}
+
 			const result = await this.loginUseCase.execute(parseData);
 
 			if (result) {
