@@ -1,6 +1,6 @@
 import { CustomError } from "../utils/CustomError";
 
-export class BadRequestError extends CustomError {
+class BadRequestError extends CustomError {
 	constructor(public message: string) {
 		super(message);
 		Object.setPrototypeOf(this, BadRequestError.prototype);
@@ -11,4 +11,6 @@ export class BadRequestError extends CustomError {
 		return { message: this.message };
 	}
 }
+
+export { BadRequestError };
 

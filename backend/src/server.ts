@@ -1,7 +1,7 @@
 import express from "express";
 import "dotenv/config";
 import { router } from "./routes";
-import { errorHandler } from "./middleware/errorHandler.middleware";
+import { errorHandler } from "./middleware/errorHandler";
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 

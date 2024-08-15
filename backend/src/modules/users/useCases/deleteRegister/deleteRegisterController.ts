@@ -1,31 +1,22 @@
-import { IRegisterDTO } from "../../interface/IRegister";
 import { DeleteRegisterUseCase } from "./deleteRegisterUseCase";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { validationDeleteUserSchema } from "../../validation/validationUser";
-import { z } from "zod";
+import { ResponseSuccess } from "../../../../utils/ResponseSuccess";
 
 class DeleteRegisterController {
 	constructor(private listRegisterUseCase: DeleteRegisterUseCase) {}
 
-	public async handle(req: Request, res: Response) {
-		const id = req.body;
-
-		const parseId = validationDeleteUserSchema.parse(id);
-
-		await this.listRegisterUseCase
-			.execute(parseId.id)
-			.then((data) => {
-				return res.status(205).json({
-					message: "user delete sucess!!",
-					user: data,
-				});
-			})
-			.catch((err) => {
-				return res.status(404).json({
-					message: "erro deletar user not exist",
-					err: err,
-				});
-			});
+	public async handle(req: Request, res: Response, next: NextFunction) {
+		try {
+			const id = req.body;
+			const parseId = validationDeleteUserSchema.parse(id);
+			const resp = await this.listRegisterUseCase.execute(parseId.id);
+			return res
+				.status(ResponseSuccess.userDeleted.statusCode)
+				.json({ message: ResponseSuccess.userDeleted.message, data: resp });
+		} catch (error) {
+			next(error);
+		}
 	}
 }
 

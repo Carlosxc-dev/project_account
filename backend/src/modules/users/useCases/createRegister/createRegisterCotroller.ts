@@ -1,25 +1,26 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction } from "express";
 import { CreateRegisterUseCase } from "./createRegisterUseCase";
 import { validationCreateUserSchema } from "../../validation/validationUser";
-import { z } from "zod";
-import { NotFoundError, ValidationError } from "../../../../err/Error";
+import { Request, Response } from "express";
+import { ResponseSuccess } from "../../../../utils/ResponseSuccess";
 
 class CreateRegisterController {
 	private createRegisterUseCase: CreateRegisterUseCase;
 
-	//constructor(private createRegisterUseCase: CreateRegisterUseCase){}		outro modo de fazer
 	constructor(createRegisterUseCase: CreateRegisterUseCase) {
 		this.createRegisterUseCase = createRegisterUseCase;
 	}
 
-	public handle(req: Request, res: Response, next: NextFunction) {
+	public async handle(req: Request, res: Response, next: NextFunction) {
 		try {
 			const data = req.body;
-			const parseData = validationCreateUserSchema.parse(data); //validação dos dados
-			this.createRegisterUseCase.execute(parseData);
-			return res.status(201).json({ message: "user made sucess !!", data: data });
+			const parseData = validationCreateUserSchema.parse(data);
+			const result = await this.createRegisterUseCase.execute(parseData);
+			return res
+				.status(ResponseSuccess.userCreated.statusCode)
+				.json({ message: ResponseSuccess.userCreated.message, data: result });
 		} catch (error) {
-			next(error);
+			next(error); // Passa o erro para o middleware de tratamento de erros
 		}
 	}
 }

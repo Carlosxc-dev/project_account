@@ -10,16 +10,16 @@ register.post("/", (req, res, next) => {
 	return createRegisterController.handle(req, res, next);
 });
 
-register.get("/", (req, res) => {
-	return listRegisterController.handle(req, res);
+register.get("/", (req, res, next) => {
+	return listRegisterController.handle(req, res, next);
 });
 
-register.delete("/", (req, res) => {
-	return deleteRegisterController.handle(req, res);
+register.delete("/", (req, res, next) => {
+	return deleteRegisterController.handle(req, res, next);
 });
 
-register.put("/", (req, res) => {
-	return updateRegisterController.handle(req, res);
+register.put("/", (req, res, next) => {
+	return updateRegisterController.handle(req, res, next);
 });
 
 export { register };

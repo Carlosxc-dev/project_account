@@ -1,15 +1,14 @@
 import { RegisterRepository } from "../../repository/RegisterRepository";
 import { IRegisterDTO } from "../../interface/IRegister";
-import { BadRequestError } from "../../../../err/badRequestError";
-import { NotFoundError } from "../../../../err/Error";
+import { NotFoundError } from "../../../../err/NotFoundError";
 
 class CreateRegisterUseCase {
 	constructor(private registerRepository: RegisterRepository) {}
 
 	public async execute(param: IRegisterDTO) {
-		const data = await this.registerRepository.findbyusername(param);
+		const response = await this.registerRepository.findbyusername(param);
 
-		if (data) {
+		if (response) {
 			throw new NotFoundError("User already exists");
 		}
 
