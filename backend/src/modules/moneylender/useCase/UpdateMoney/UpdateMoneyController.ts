@@ -1,4 +1,4 @@
-import { ImoneylenderDTO } from "../../../../interface/Imoneylender";
+import { ImoneylenderDTO } from "../../interface/Imoneylender";
 import { UpdateMoneyUseCase } from "./UpdateMoneyUseCase";
 import { Request, Response } from "express";
 
@@ -10,7 +10,7 @@ class UpdateMoneyController {
 
 		const aux = await this.updateMoneyUseCase.execute(data);
 
-		return res.status(201).send(aux);
+		return res.status(200).send(aux);
 	}
 }
 

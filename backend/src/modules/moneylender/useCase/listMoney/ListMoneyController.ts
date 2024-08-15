@@ -9,7 +9,7 @@ class ListMoneyController {
 
 		const aux = await this.listMoneyUseCase.execute(userId);
 
-		return res.status(201).send(aux);
+		return res.status(200).send(aux);
 	}
 }
 

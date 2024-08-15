@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
-import prisma from "../../../../utils/prisma";
 import { RegisterRepository } from "../../repository/RegisterRepository";
 import { IRegisterDTO } from "../../interface/IRegister";
+import { BadRequestError } from "../../../../err/badRequestError";
+import { NotFoundError } from "../../../../err/Error";
 
 class CreateRegisterUseCase {
 	constructor(private registerRepository: RegisterRepository) {}
@@ -10,7 +10,7 @@ class CreateRegisterUseCase {
 		const data = await this.registerRepository.findbyusername(param);
 
 		if (data) {
-			throw new Error("User already exists");
+			throw new NotFoundError("User already exists");
 		}
 
 		const dataUser = await this.registerRepository.createRegister(param);

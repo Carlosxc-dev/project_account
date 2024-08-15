@@ -1,4 +1,4 @@
-import { ImoneylenderDTO } from "../../../../interface/Imoneylender";
+import { ImoneylenderDTO } from "../../interface/Imoneylender";
 import { MoneyRepository } from "../../repositories/MoneyRepository";
 
 class UpdateMoneyUseCase {

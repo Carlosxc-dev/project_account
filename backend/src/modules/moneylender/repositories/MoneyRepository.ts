@@ -52,12 +52,9 @@ class MoneyRepository implements Imoneylender {
 	}
 
 	public async listMoney(userid: number): Promise<any> {
-		return await prisma.account.findUnique({
+		return await prisma.moneylender.findMany({
 			where: {
-				id: userid,
-			},
-			include: {
-				moneylenders: true,
+				id_account: userid,
 			},
 		});
 	}

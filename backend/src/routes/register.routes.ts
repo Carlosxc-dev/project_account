@@ -6,8 +6,8 @@ import { updateRegisterController } from "../modules/users/useCases/update";
 
 const register = Router();
 
-register.post("/", (req, res) => {
-	return createRegisterController.handle(req, res);
+register.post("/", (req, res, next) => {
+	return createRegisterController.handle(req, res, next);
 });
 
 register.get("/", (req, res) => {

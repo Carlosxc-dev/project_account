@@ -13,7 +13,7 @@ class UpdateRegisterController {
 		await this.updateRegisterUseCase
 			.execute(parseData)
 			.then((response) => {
-				return res.status(201).send({
+				return res.status(200).send({
 					message: "usuario update com sucesso",
 					data: response,
 				});

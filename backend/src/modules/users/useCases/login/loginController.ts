@@ -19,7 +19,7 @@ class LoginController {
 			.execute(parseData)
 			.then((response) => {
 				if (!response) {
-					return res.status(400).send({
+					return res.status(404).send({
 						message: "user nao encontrado",
 					});
 				}

@@ -7,7 +7,7 @@ class ListRegisterController {
 	public async handle(req: Request, res: Response) {
 		const aux = await this.listRegisterUseCase.execute();
 
-		return res.status(201).send(aux);
+		return res.status(200).send(aux);
 	}
 }
 

@@ -15,13 +15,13 @@ class DeleteRegisterController {
 		await this.listRegisterUseCase
 			.execute(parseId.id)
 			.then((data) => {
-				return res.status(201).json({
+				return res.status(205).json({
 					message: "user delete sucess!!",
 					user: data,
 				});
 			})
 			.catch((err) => {
-				return res.status(400).json({
+				return res.status(404).json({
 					message: "erro deletar user not exist",
 					err: err,
 				});
