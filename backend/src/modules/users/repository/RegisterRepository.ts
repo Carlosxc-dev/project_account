@@ -57,6 +57,7 @@ class RegisterRepository implements IRegister {
 		try {
 			const datauser = await prisma.account.findMany({
 				select: {
+					id: true,
 					name: true,
 					email: true,
 					password: true,

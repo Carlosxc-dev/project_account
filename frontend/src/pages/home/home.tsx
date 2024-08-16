@@ -24,17 +24,6 @@ export default function home() {
   const passwordDel = useRef<HTMLInputElement>(null);
   const { setMsg } = useGlobalContext();
 
-  async function handleAlter(e: React.FormEvent) {
-    e.preventDefault();
-    const data: Idata = {
-      name: nameRef.current?.value || "",
-      userName: usernameRef.current?.value || "",
-      password: passwordRef.current?.value || "",
-    };
-    console.log(data);
-    alterUsers(data, setMsg);
-  }
-
   async function list() {
     listUsers(setMsg);
   }

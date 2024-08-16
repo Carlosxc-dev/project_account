@@ -9,7 +9,7 @@ const home = Router();
 home.post("/create", (req, res, next) => {
 	return createMoneyController.handle(req, res, next);
 });
-home.get("/list", (req, res, next) => {
+home.post("/list", (req, res, next) => {
 	return listMoneyController.handle(req, res, next);
 });
 home.put("/update", (req, res, next) => {

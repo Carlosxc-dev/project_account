@@ -3,24 +3,25 @@ import { Data } from "./styled";
 import { useEffect, useState } from "react";
 
 interface Moneylender {
-  id: number;
-  option: string;
-  valor: string;
-  pago: string;
+  name: string;
+  option: boolean;
+  value: number;
+  pago: boolean;
   createdAt: string; // ou Date, dependendo de como está formatada a data
 }
 
 export default function DataComponent() {
   // Alterei o nome do componente para evitar conflito com o nome importado.
   const [moneys, setMoneys] = useState<Moneylender[]>([]); // Inicializa como um array vazio de Moneylender
-
+  const userId = 2;
   async function listMoney() {
-    await fetch("http://localhost:8080/home", {
-      method: "GET",
+    await fetch("http://localhost:8080/home/list", {
+      method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify(userId),
     })
       .then((res) => res.json())
       .then((res) => {
@@ -47,11 +48,11 @@ export default function DataComponent() {
 
       {moneys.map((money, index) => (
         <div key={index} className="content">
-          <p>{money.id}</p>
-          <p className={money.option == "divida" ? "divida" : "emprestimo"}>
+          <p>{money.name}</p>
+          <p className={money.option == true ? "divida" : "emprestimo"}>
             {money.option}
           </p>
-          <p>R$ {money.valor},00</p>
+          <p>R$ {money.value},00</p>
           <p>{money.createdAt}</p>
         </div>
       ))}

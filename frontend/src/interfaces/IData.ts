@@ -1,6 +1,6 @@
 interface IData {
-  name: string;
-  userName: string;
+  name?: string;
+  email: string;
   password: string;
 }
 

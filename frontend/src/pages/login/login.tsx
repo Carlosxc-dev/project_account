@@ -8,25 +8,33 @@ import { useGlobalContext } from "../../context/msg";
 import { useAuth } from "../../context/AuthContext";
 
 export default function Login() {
-  const nameRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const { msg, setMsg, setUser } = useGlobalContext();
+  const { msg, setMsg, setUser, user } = useGlobalContext();
   const { islogin } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const data: IData = {
-      name: nameRef.current?.value || "",
-      userName: usernameRef.current?.value || "",
+      email: usernameRef.current?.value || "",
       password: passwordRef.current?.value || "",
     };
 
-    login(data, setMsg, setUser);
-    islogin();
-    navigate("/home"); // Redireciona para a página inicial        }else{
+    if (data.email === "" || data.password === "") {
+      setMsg("Preencha todos os campos");
+      return;
+    }
+
+    const status = await login(data, setMsg, setUser);
+
+    if (status === 200) {
+      islogin();
+      navigate("/home"); // Redireciona para a página inicial
+    } else {
+      setMsg("Usuário ou senha não encontrados");
+    }
   };
 
   return (
@@ -36,13 +44,8 @@ export default function Login() {
         <h3>SIGN IN</h3>
         <p>Enter your credentials to access your account</p>
         <Form onSubmit={handleSubmit}>
-          <label htmlFor="username">Email:</label>
-          <input
-            type="text"
-            id="username"
-            placeholder="Email"
-            ref={usernameRef}
-          />
+          <label htmlFor="email">Email:</label>
+          <input type="text" id="email" placeholder="Email" ref={usernameRef} />
           <label htmlFor="password">Password:</label>
           <input
             type="password"

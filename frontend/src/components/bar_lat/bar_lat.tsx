@@ -11,8 +11,6 @@ export default function BarLat() {
   const { logout } = useAuth();
   const { user } = useGlobalContext();
 
-  console.log(user, "usersfagjeaspf");
-
   function handleExit() {
     logout();
     navegate("/");

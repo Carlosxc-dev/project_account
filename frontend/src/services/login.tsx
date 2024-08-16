@@ -8,22 +8,20 @@ async function login(
   try {
     const response = await fetch("http://localhost:8080/login", {
       method: "POST",
-      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
 
-    // Converta a resposta para JSON
-    const responseData = await response.json();
-
-    if (response.ok) {
-      // Acesse as propriedades do JSON
-      setMsg("Login efetuado com sucesso");
-      setUser(responseData.data.name); // Ajustado para acessar userName
+    if (response.status === 200) {
+      const userData = await response.json();
+      setUser(userData);
+      return response.status; // Retorna o status 200
     } else {
-      setMsg("Usuário ou senha não encontrados");
+      const errorData = await response.json();
+      setMsg(errorData.message || "Erro na autenticação");
+      return response.status; // Retorna o status de erro
     }
   } catch (error) {
     setMsg("Erro de rede. Verifique sua conexão e tente novamente.");

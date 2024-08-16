@@ -16,7 +16,7 @@ export default function Register() {
     e.preventDefault();
     const data = {
       name: nameRef.current?.value || "",
-      userName: usernameRef.current?.value || "",
+      email: usernameRef.current?.value || "",
       password: passwordRef.current?.value || "",
     };
     console.log(data);

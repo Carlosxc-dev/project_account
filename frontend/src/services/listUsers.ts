@@ -1,5 +1,3 @@
-import { IData } from "../interfaces/IData";
-
 async function listUsers(setMsg: (message: string) => void) {
   await fetch("http://localhost:8080/register", {
     method: "GET",
@@ -10,8 +8,7 @@ async function listUsers(setMsg: (message: string) => void) {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
-      setMsg(res);
+      setMsg(res.message);
     })
     .catch((err) => {
       console.error(err);
