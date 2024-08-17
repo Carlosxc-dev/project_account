@@ -2,22 +2,22 @@ import { useRef } from "react";
 import { Conteiner, Form } from "./styled";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../services/login";
-import { IData } from "../../interfaces/IData";
-import { useGlobalContext } from "../../context/msg";
-import { useAuth } from "../../context/AuthContext";
+import { login } from "../../services/serviceLogin";
+import { IUser } from "../../interfaces/IUser";
+import { useGlobalContext } from "../../../../global/context/msg";
+import { useAuth } from "../../../../global/context/AuthContext";
 
 export default function Login() {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const { msg, setMsg, setUser, user } = useGlobalContext();
-  const { islogin } = useAuth();
+  const { islogin, setToken } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const data: IData = {
+    const data: IUser = {
       email: usernameRef.current?.value || "",
       password: passwordRef.current?.value || "",
     };
@@ -27,10 +27,9 @@ export default function Login() {
       return;
     }
 
-    const status = await login(data, setMsg, setUser);
+    const status = await login(data, setMsg, setUser, setToken);
 
     if (status === 200) {
-      islogin();
       navigate("/home"); // Redireciona para a página inicial
     } else {
       setMsg("Usuário ou senha não encontrados");

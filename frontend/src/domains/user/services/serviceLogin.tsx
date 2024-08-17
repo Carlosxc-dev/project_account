@@ -1,13 +1,16 @@
-import { IData } from "../interfaces/IData";
+import { IUser } from "../interfaces/IUser";
 
 async function login(
-  data: IData,
+  data: IUser,
   setMsg: (message: string) => void,
-  setUser: (userName: string) => void
+  setUser: (userName: string) => void,
+  setToken: (token: string) => void
 ) {
   try {
-    const response = await fetch("http://localhost:8080/login", {
+    const url = import.meta.env.VITE_API_LOGIN;
+    const response = await fetch(url, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -16,6 +19,7 @@ async function login(
 
     if (response.status === 200) {
       const userData = await response.json();
+      setToken(userData.token);
       setUser(userData);
       return response.status; // Retorna o status 200
     } else {

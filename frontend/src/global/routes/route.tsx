@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from "../pages/login/login";
-import Home from "../pages/home/home";
-import Register from "../pages/register/register";
-import Settings from "../pages/settings/settings";
-import Dashboard from "../pages/dashboard/dashboard";
+import Login from "../../domains/user/pages/login/pageLogin";
+import Home from "../../domains/money/pages/home/home";
+import Register from "../../domains/user/pages/register/pageRegister";
+import Settings from "../../domains/money/pages/settings/settings";
+import Dashboard from "../../domains/money/pages/dashboard/dashboard";
 import { PrivateRoute } from "./protectRoute";
 import { AuthProvider } from "../context/AuthContext";
 

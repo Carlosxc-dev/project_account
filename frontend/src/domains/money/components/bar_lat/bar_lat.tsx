@@ -1,10 +1,10 @@
 import { Bar_lat } from "./styled";
 import { IoIosLogOut } from "react-icons/io";
-import profile from "../../assets/profile.jpeg";
+import profile from "../../../../assets/profile.jpeg";
 import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineHome, MdOutlineSettingsSuggest } from "react-icons/md";
-import { useAuth } from "../../context/AuthContext";
-import { useGlobalContext } from "../../context/msg";
+import { useAuth } from "../../../../global/context/AuthContext";
+import { useGlobalContext } from "../../../../global/context/msg";
 
 export default function BarLat() {
   const navegate = useNavigate();
@@ -23,7 +23,7 @@ export default function BarLat() {
 
       <div className="profile">
         <img src={profile} alt="" />
-        <h3>{user}</h3>
+        <h3>user</h3>
         <p>admin</p>
       </div>
 

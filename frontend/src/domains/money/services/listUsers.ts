@@ -1,5 +1,6 @@
 async function listUsers(setMsg: (message: string) => void) {
-  await fetch("http://localhost:8080/register", {
+  const url = import.meta.env.VITE_API_LIST_USERS;
+  await fetch(url, {
     method: "GET",
     credentials: "include",
     headers: {

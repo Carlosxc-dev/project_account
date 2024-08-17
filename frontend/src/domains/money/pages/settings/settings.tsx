@@ -1,6 +1,6 @@
 import { Conteiner } from "./styled";
 import { deleteUser } from "../../services/deleteUsers";
-import { useGlobalContext } from "../../context/msg";
+import { useGlobalContext } from "../../../../global/context/msg";
 import { useNavigate } from "react-router-dom";
 
 export default function Settings() {

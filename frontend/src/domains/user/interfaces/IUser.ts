@@ -1,7 +1,7 @@
-interface IData {
+interface IUser {
   name?: string;
   email: string;
   password: string;
 }
 
-export type { IData };
+export type { IUser };

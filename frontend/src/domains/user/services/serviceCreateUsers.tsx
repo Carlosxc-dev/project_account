@@ -1,8 +1,9 @@
-import { IData } from "../interfaces/IData";
+import { IUser } from "../interfaces/IUser";
 
-const CreateUsers = async (data: IData, setMsg: (message: string) => void) => {
+const CreateUsers = async (data: IUser, setMsg: (message: string) => void) => {
   try {
-    const res = await fetch("http://localhost:8080/register", {
+    const url = import.meta.env.VITE_API_REGISTER;
+    const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

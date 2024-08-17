@@ -7,7 +7,7 @@ export default function dashboard() {
     <>
       <Card />
       <Bar_title />
-      <DataComponent />
+      {/* <DataComponent /> */}
     </>
   );
 }

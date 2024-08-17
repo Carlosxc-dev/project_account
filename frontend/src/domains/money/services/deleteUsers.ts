@@ -1,5 +1,6 @@
 async function deleteUser(username: string, setMsg: (message: string) => void) {
-  await fetch("http://localhost:8080/register", {
+  const url = import.meta.env.VITE_API_DELETE_USERS;
+  await fetch(url, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

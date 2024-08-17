@@ -1,7 +1,6 @@
-import { IData } from "../interfaces/IData";
-
-async function alterUsers(data: IData, setMsg: (message: string) => void) {
-  await fetch("http://localhost:8080/register", {
+async function alterUsers(data: any, setMsg: (message: string) => void) {
+  const url = import.meta.env.VITE_API_ALTER_USERS;
+  await fetch(url, {
     method: "PUT",
     credentials: "include",
     headers: {

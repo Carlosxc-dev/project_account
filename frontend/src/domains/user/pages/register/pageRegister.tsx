@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
 import { Conteiner, Form } from "./styled";
 import { Link, useNavigate } from "react-router-dom";
-import { useGlobalContext } from "../../context/msg";
+import { useGlobalContext } from "../../../../global/context/msg";
 
-import { CreateUsers } from "../../services/createUsers";
+import { CreateUsers } from "../../services/serviceCreateUsers";
 
 export default function Register() {
   const nameRef = useRef<HTMLInputElement>(null);
