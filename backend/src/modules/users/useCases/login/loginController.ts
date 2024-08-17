@@ -16,6 +16,7 @@ class LoginController {
 		try {
 			const data = req.body;
 			const parseData = validationLoginUserSchema.parse(data);
+			let mytoken = "";
 
 			const hashedPassword = await this.loginUseCase.findHash(parseData.email);
 			const is_password = await this.auth.comparePassword(parseData.password, hashedPassword);
@@ -27,17 +28,11 @@ class LoginController {
 			const result = await this.loginUseCase.execute(parseData);
 
 			if (result) {
-				const token = this.auth.generateToken(result.email);
-				res.cookie("token", token, {
-					httpOnly: true, // somente http
-					secure: false, // Use apenas em HTTPS
-					sameSite: "strict", // Protege contra CSRF
-					maxAge: 1000 * 60 * 60, // 1 hora
-				});
+				mytoken = this.auth.generateToken(result.email);
 			}
 			return res
 				.status(ResponseSuccess.loginSuccess.statusCode)
-				.send({ message: ResponseSuccess.loginSuccess.message, data: result });
+				.send({ message: ResponseSuccess.loginSuccess.message, data: result, token: mytoken });
 		} catch (error) {
 			next(error);
 		}
