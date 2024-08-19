@@ -3,6 +3,7 @@ import { listMoneyController } from "../modules/moneylender/useCase/listMoney/in
 import { createMoneyController } from "../modules/moneylender/useCase/createMoney/index";
 import { updateMoneyController } from "../modules/moneylender/useCase/UpdateMoney/index";
 import { deleteMoneyController } from "../modules/moneylender/useCase/DeleteMoney/index";
+import { readCountMoneyController } from "../modules/moneylender/useCase/readCountMoney/index";
 
 const home = Router();
 
@@ -14,6 +15,10 @@ home.post("/list", (req, res, next) => {
 });
 home.put("/update", (req, res, next) => {
 	return updateMoneyController.handle(req, res, next);
+});
+
+home.post("/count", (req, res, next) => {
+	return readCountMoneyController.handle(req, res, next);
 });
 
 home.delete("/delete", (req, res, next) => {

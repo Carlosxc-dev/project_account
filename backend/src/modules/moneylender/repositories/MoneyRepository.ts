@@ -110,6 +110,38 @@ class MoneyRepository implements Imoneylender {
 			throw new BadRequestError("Unknown database error");
 		}
 	}
+
+	public async countMoney(userid: number): Promise<any> {
+		try {
+			const credito = await prisma.moneylender.aggregate({
+				where: {
+					id_account: userid,
+					option: true,
+				},
+				_sum: {
+					value: true,
+				},
+			});
+
+			const debito = await prisma.moneylender.aggregate({
+				where: {
+					id_account: userid,
+					option: false,
+				},
+				_sum: {
+					value: true,
+				},
+			});
+
+			return { credito, debito };
+		} catch (err) {
+			if (err instanceof PrismaClientKnownRequestError) {
+				// Verificar o erro específico e lançar um erro customizado, se necessário
+				throw new NotFoundError("Database query error / users not exist");
+			}
+			throw new BadRequestError("Unknown database error");
+		}
+	}
 }
 
 export { MoneyRepository };
