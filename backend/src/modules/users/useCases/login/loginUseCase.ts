@@ -22,7 +22,7 @@ class LoginUseCase {
 		const result = await this.registerRepository.findbyusername(email);
 
 		if (!result) {
-			throw new NotFoundError("user nao existe !");
+			throw new NotFoundError("user nao existe -- !");
 		}
 
 		return result.password;
@@ -30,4 +30,3 @@ class LoginUseCase {
 }
 
 export { LoginUseCase };
-

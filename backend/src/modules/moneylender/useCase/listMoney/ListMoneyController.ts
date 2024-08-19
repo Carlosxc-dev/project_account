@@ -8,10 +8,8 @@ class ListMoneyController {
 	public async handle(req: Request, res: Response, next: NextFunction) {
 		try {
 			const { userId } = req.body;
-			console.log(userId);
 
 			const result = await this.listMoneyUseCase.execute(userId);
-			console.log(result);
 
 			res.status(ResponseSuccessMoney.operationCompleted.statusCode).json({
 				message: ResponseSuccessMoney.operationCompleted.message,
@@ -24,4 +22,3 @@ class ListMoneyController {
 }
 
 export { ListMoneyController };
-

@@ -15,6 +15,7 @@ class LoginController {
 	public async handle(req: Request, res: Response, next: NextFunction) {
 		try {
 			const data = req.body;
+
 			const parseData = validationLoginUserSchema.parse(data);
 			let mytoken = "";
 
@@ -40,4 +41,3 @@ class LoginController {
 }
 
 export { LoginController };
-

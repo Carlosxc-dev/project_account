@@ -1,6 +1,9 @@
-import { BiDollarCircle } from "react-icons/bi";
 import { Data } from "./styled";
 import { useEffect, useState } from "react";
+
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+
+import { format } from "date-fns";
 
 interface Moneylender {
   name: string;
@@ -13,28 +16,49 @@ interface Moneylender {
 export default function DataComponent() {
   // Alterei o nome do componente para evitar conflito com o nome importado.
   const [moneys, setMoneys] = useState<Moneylender[]>([]); // Inicializa como um array vazio de Moneylender
-  const userId = 2;
-  async function listMoney() {
-    await fetch("http://localhost:8080/home/list", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userId),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setMoneys(res.data); // Armazena toda a lista de moneylenders no estado
-      })
-      .catch((err) => {
-        console.error(err);
+  const auth: any = useAuthUser();
+
+  console.log(auth.userId, "id");
+
+  async function handleSubmit() {
+    try {
+      const data = {
+        userId: 1,
+      };
+      const url = import.meta.env.VITE_API_LIST_MONEYS;
+      console.log(data, "userid");
+
+      const response = await fetch(url, {
+        method: "POST",
+        credentials: "include", // Garante que cookies de sessão sejam enviados
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       });
+
+      const parseResp = await response.json();
+
+      if (response.status === 200) {
+        console.log(parseResp);
+        // Itera sobre os itens e formata a data de cada um
+        const formattedData = parseResp.data.map((item: any) => {
+          return {
+            ...item,
+            createdAt: format(new Date(item.createdAt), "dd/MM/yyyy"),
+          };
+        });
+        setMoneys(formattedData);
+      } else {
+        console.log("erro na resposta de listar moneys !!", parseResp.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
-    listMoney();
+    handleSubmit();
   }, []);
 
   return (
@@ -50,7 +74,7 @@ export default function DataComponent() {
         <div key={index} className="content">
           <p>{money.name}</p>
           <p className={money.option == true ? "divida" : "emprestimo"}>
-            {money.option}
+            {money.option == true ? "divida" : "emprestimo"}
           </p>
           <p>R$ {money.value},00</p>
           <p>{money.createdAt}</p>

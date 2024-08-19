@@ -40,7 +40,7 @@ describe("Create user", () => {
 		await createRegisterController.handle(mockReq, mockRes, mockNext);
 
 		// Check that the status was called with 201
-		expect(mockRes.status).toHaveBeenCalledWith(201);
+		expect(mockRes.status).toHaveBeenCalledWith(202);
 		expect(mockRes.json).toHaveBeenCalledWith(
 			expect.objectContaining({
 				message: "User created successfully!",
@@ -52,4 +52,3 @@ describe("Create user", () => {
 		);
 	});
 });
-

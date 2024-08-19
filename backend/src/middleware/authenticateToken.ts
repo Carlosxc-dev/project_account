@@ -14,7 +14,7 @@ class AuthenticateToken {
 			const token = req.cookies.token;
 
 			if (!token) {
-				throw new AuthenticationError("users not authorized");
+				throw new AuthenticationError("users not authorized --");
 			}
 
 			const decoded = this.auth.verifyToken(token);
@@ -31,4 +31,3 @@ class AuthenticateToken {
 }
 
 export { AuthenticateToken };
-
