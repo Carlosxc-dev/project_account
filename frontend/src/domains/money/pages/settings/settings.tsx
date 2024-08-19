@@ -1,22 +1,61 @@
-import { Conteiner } from "./styled";
-import { deleteUser } from "../../services/deleteUsers";
-import { useGlobalContext } from "../../../../global/context/msg";
-import { useNavigate } from "react-router-dom";
+import { Conteiner, StyledErrorMessage } from "./styled";
+import { Field, Form, Formik } from "formik";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import useSignOut from "react-auth-kit/hooks/useSignOut";
+
+interface FormValues {
+  id: number;
+  name: string;
+  password: string;
+}
+
+const initialValues: FormValues = {
+  id: 999,
+  name: "",
+  password: "",
+};
 
 export default function Settings() {
-  const navegate = useNavigate();
-  const { user, setMsg } = useGlobalContext();
+  const auth: any = useAuthUser();
+  const SignOut: any = useSignOut();
 
-  function deletee() {
-    console.log(user);
+  async function handleSubmitAlter(values: FormValues) {
+    values.id = auth.userId;
+    console.log(values);
+    const url = import.meta.env.VITE_API_ALTER_USERS;
+    const response = await fetch(url, {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
 
-    deleteUser(user, setMsg);
-    //navegate("/");
+    if (response.status === 200) {
+      alert("User altered");
+    } else {
+      alert("Error");
+    }
   }
 
-  function alterr() {
-    const { user, setMsg } = useGlobalContext();
-    deleteUser(user, setMsg);
+  async function handleSubmitDelete() {
+    const url = import.meta.env.VITE_API_DELETE_USERS;
+    const response = await fetch(url, {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id_account: auth.id }),
+    });
+
+    if (response.status === 200) {
+      console.log("User deleted");
+      SignOut();
+    } else {
+      alert("Error");
+    }
   }
 
   return (
@@ -24,21 +63,29 @@ export default function Settings() {
       <h1>Settings</h1>
 
       <h3>Alter User</h3>
-      <form action="" onSubmit={alterr}>
-        <label htmlFor="">
-          Name:
-          <input type="text" placeholder="Name" />
-        </label>
-        <label htmlFor="">
-          Password:
-          <input type="password" placeholder="Password" />
-        </label>
-        <button>Alter</button>
-      </form>
+      <Formik initialValues={initialValues} onSubmit={handleSubmitAlter}>
+        <Form className="form">
+          <label htmlFor="name">Name</label>
+          <Field name="name" type="text" />
+          <StyledErrorMessage name="name" component="div" />
+
+          <label htmlFor="value">Password: </label>
+          <Field name="password" type="password" />
+          <StyledErrorMessage name="password" component="div" />
+
+          <button type="submit">Submit</button>
+        </Form>
+      </Formik>
 
       <h3>Delete User</h3>
-      <p>This action is inversible</p>
-      <button onClick={deletee}>Delete</button>
+      <Formik initialValues={initialValues} onSubmit={handleSubmitDelete}>
+        <Form className="form">
+          <label className="info">This action is inversible</label>
+          <button type="submit" className="delete">
+            Delete
+          </button>
+        </Form>
+      </Formik>
     </Conteiner>
   );
 }

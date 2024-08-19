@@ -1,3 +1,4 @@
+import { ErrorMessage } from "formik";
 import styled from "styled-components";
 
 export const Conteiner = styled.div`
@@ -28,17 +29,15 @@ export const Conteiner = styled.div`
     margin-top: 1rem;
   }
 
-  form {
+  .form {
     display: flex;
-    flex-direction: row;
-    gap: 10px;
-    width: 100%;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 1rem;
+    width: 40%;
 
     label {
       font-size: ${(props) => props.theme.fonts.p};
       font-weight: ${(props) => props.theme.fonts.bold};
-      flex: 3 2 200px;
       display: flex;
       flex-direction: column;
     }
@@ -55,32 +54,31 @@ export const Conteiner = styled.div`
     }
 
     button {
+      padding: 1rem 5rem;
       border: none;
-      border-radius: 5px;
-      background-color: ${(props) => props.theme.colors.background_button};
+      border-radius: 8px;
+      width: 100%;
+      background-color: ${(props) => props.theme.colors.primary};
       color: #fff;
       font-size: ${(props) => props.theme.fonts.p};
       font-weight: ${(props) => props.theme.fonts.regular};
       cursor: pointer;
-      flex: 0.5 1 200px;
-      align-self: flex-end;
+    }
+
+    .delete {
+      background-color: #e92121;
+    }
+
+    .info {
+      font-size: ${(props) => props.theme.fonts.p};
+      font-weight: ${(props) => props.theme.regular};
+      color: #e92121;
     }
   }
+`;
 
-  p {
-    font-size: ${(props) => props.theme.fonts.p};
-    font-weight: ${(props) => props.theme.regular};
-    color: #e92121;
-  }
-
-  button {
-    padding: 1rem 5rem;
-    border: none;
-    border-radius: 8px;
-    background-color: #e92121;
-    color: #fff;
-    font-size: ${(props) => props.theme.fonts.p};
-    font-weight: ${(props) => props.theme.fonts.regular};
-    cursor: pointer;
-  }
+export const StyledErrorMessage = styled(ErrorMessage)`
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
 `;

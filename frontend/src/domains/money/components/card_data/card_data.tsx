@@ -23,10 +23,10 @@ export default function DataComponent() {
   async function handleSubmit() {
     try {
       const data = {
-        userId: 1,
+        userId: auth.userId,
       };
       const url = import.meta.env.VITE_API_LIST_MONEYS;
-      console.log(data, "userid");
+      console.log(data, "userid", url);
 
       const response = await fetch(url, {
         method: "POST",
@@ -73,8 +73,8 @@ export default function DataComponent() {
       {moneys.map((money, index) => (
         <div key={index} className="content">
           <p>{money.name}</p>
-          <p className={money.option == true ? "divida" : "emprestimo"}>
-            {money.option == true ? "divida" : "emprestimo"}
+          <p className={money.option == true ? "emprestimo" : "divida"}>
+            {money.option == true ? "credito" : "debito"}
           </p>
           <p>R$ {money.value},00</p>
           <p>{money.createdAt}</p>
