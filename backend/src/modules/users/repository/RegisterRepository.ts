@@ -95,13 +95,19 @@ class RegisterRepository implements IRegister {
 		}
 	}
 
-	public async delete(userid: number): Promise<IRegisterDTO> {
+	public async delete(userid: number): Promise<any> {
 		try {
-			return await prisma.account.delete({
+			await prisma.moneylender.deleteMany({
+				where: { id_account: userid },
+			});
+
+			await prisma.account.delete({
 				where: {
 					id: userid,
 				},
 			});
+
+			return "User and your moneys deleted";
 		} catch (err) {
 			if (err instanceof PrismaClientKnownRequestError) {
 				// Verificar o erro específico e lançar um erro customizado, se necessário

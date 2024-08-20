@@ -4,17 +4,15 @@ export const Data = styled.div`
   width: 100%;
 
   .bar_info {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    color: ${(props) => props.theme.colors.label};
+    p {
+      font-size: 2rem;
+      font-weight: bold;
+    }
   }
 
   .content {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 50px 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
     width: 100%;
     padding: 1rem 0px;
@@ -24,6 +22,12 @@ export const Data = styled.div`
     .icon {
       width: 20px;
       height: 20px;
+    }
+
+    .btn {
+      color: ${(props) => props.theme.colors.primary};
+      border: none;
+      background-color: transparent;
     }
 
     .divida {

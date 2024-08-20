@@ -19,14 +19,13 @@ const validationCreateUserSchema = z.object({
 
 const validationUpdateUserSchema = z.object({
 	id: z.number().min(1),
-	name: z.string().min(3).optional(),
+	name: z.string().min(3),
 	password: z
 		.string({
 			required_error: "Password is required",
 			message: "Password must be at least 3 characters",
 		})
-		.min(3)
-		.optional(),
+		.min(3),
 });
 
 const validationDeleteUserSchema = z.object({
@@ -54,4 +53,3 @@ export {
 	validationDeleteUserSchema,
 	validationLoginUserSchema,
 };
-

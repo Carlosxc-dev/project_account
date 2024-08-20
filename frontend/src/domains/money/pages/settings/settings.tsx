@@ -2,6 +2,7 @@ import { Conteiner, StyledErrorMessage } from "./styled";
 import { Field, Form, Formik } from "formik";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import useSignOut from "react-auth-kit/hooks/useSignOut";
+import { useNavigate } from "react-router-dom";
 
 interface FormValues {
   id: number;
@@ -16,6 +17,7 @@ const initialValues: FormValues = {
 };
 
 export default function Settings() {
+  const navigate = useNavigate();
   const auth: any = useAuthUser();
   const SignOut: any = useSignOut();
 
@@ -40,6 +42,10 @@ export default function Settings() {
   }
 
   async function handleSubmitDelete() {
+    const values = { id: auth.userId };
+
+    console.log(values);
+
     const url = import.meta.env.VITE_API_DELETE_USERS;
     const response = await fetch(url, {
       method: "DELETE",
@@ -47,12 +53,13 @@ export default function Settings() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id_account: auth.id }),
+      body: JSON.stringify(values),
     });
 
     if (response.status === 200) {
       console.log("User deleted");
       SignOut();
+      navigate("/");
     } else {
       alert("Error");
     }

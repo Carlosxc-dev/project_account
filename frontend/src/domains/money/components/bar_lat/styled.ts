@@ -32,6 +32,7 @@ export const Bar_lat = styled.div`
       width: 100px;
       height: 100px;
       border-radius: 50%;
+      border: 1px solid ${(props) => props.theme.colors.h1};
     }
 
     h3 {
@@ -85,7 +86,7 @@ export const Bar_lat = styled.div`
     .icon {
       width: 20px;
       height: 20px;
-      margin-right: 0.6rem;
+      margin-right: 0.5rem;
     }
   }
 

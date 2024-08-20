@@ -60,7 +60,7 @@ export default function card() {
 
         <h3>Payments</h3>
         <div className="value">
-          <span>R$</span>
+          <span>R$ </span>
           {count.debito}
         </div>
       </div>
@@ -68,7 +68,7 @@ export default function card() {
         <BiDollarCircle className="icon" />
         <h3>buyments</h3>
         <div className="value">
-          <span>R$</span>
+          <span>R$ </span>
           {count.credito}
         </div>
       </div>
