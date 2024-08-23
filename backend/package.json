@@ -1,7 +1,8 @@
 {
 	"scripts": {
 		"dev": "tsx watch src/server.ts",
-		"test": "jest --detectOpenHandles"
+		"test": "jest --detectOpenHandles",
+		"build": "tsc"
 	},
 	"dependencies": {
 		"@prisma/client": "^5.17.0",
@@ -31,7 +32,6 @@
 		"@types/jsonwebtoken": "^9.0.6",
 		"@types/supertest": "^6.0.2",
 		"supertest": "^7.0.0",
-		"ts-jest": "^29.2.4",
-		"zod-prisma": "^0.5.4"
+		"ts-jest": "^29.2.4"
 	}
 }
