@@ -20,7 +20,6 @@
 		"jsonwebtoken": "^9.0.2",
 		"pretty": "^2.0.0",
 		"prisma": "^5.17.0",
-		"prisma-zod-generator": "^0.8.13",
 		"swagger-ui-express": "^5.0.1",
 		"tsx": "^4.16.3",
 		"typescript": "^5.5.4",
