@@ -20,7 +20,7 @@ RUN npx prisma generate
 RUN npm run build
 
 # Exponha a porta em que o servidor irá rodar
-EXPOSE 3001
+EXPOSE 8080
 
 # Comando para iniciar o servidor
 CMD ["node", "dist/server.js"]
