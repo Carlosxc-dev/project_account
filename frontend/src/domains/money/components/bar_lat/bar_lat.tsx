@@ -1,10 +1,8 @@
 import { Bar_lat } from "./styled";
 import { IoIosLogOut } from "react-icons/io";
-import profile from "../../../../assets/profile.jpeg";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineHome, MdOutlineSettingsSuggest } from "react-icons/md";
-import { MdLibraryAdd } from "react-icons/md";
 
 import avatar01 from "../../../../assets/avatar01.jpg";
 import avatar02 from "../../../../assets/avatar02.jpg";

@@ -1,6 +1,6 @@
 import { Conteiner, StyledErrorMessage } from "./styled";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";

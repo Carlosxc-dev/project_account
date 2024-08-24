@@ -7,7 +7,7 @@ import Light from "./styles/theme/light";
 import Route from "./routes/route";
 
 function App() {
-  const [theme, setTheme] = useState(Light);
+  const [theme] = useState(Light);
 
   return (
     <ThemeProvider theme={theme}>

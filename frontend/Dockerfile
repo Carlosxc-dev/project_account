@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Instale as dependências
-RUN npm install
+RUN NODE_OPTIONS="--max-old-space-size=4096" npm install --legacy-peer-deps
 
 # Copie o restante dos arquivos para o container
 COPY . .

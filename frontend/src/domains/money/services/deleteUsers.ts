@@ -1,4 +1,4 @@
-async function deleteUser(username: string, setMsg: (message: string) => void) {
+async function deleteUser(setMsg: (message: string) => void) {
   const url = import.meta.env.VITE_API_DELETE_USERS;
   await fetch(url, {
     method: "DELETE",

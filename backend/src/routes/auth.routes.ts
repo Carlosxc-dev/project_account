@@ -9,7 +9,7 @@ class Auth {
 	}
 
 	public generateToken(userName: string): string {
-		return jwt.sign({ id: userName }, this.JWT_SECRET, { expiresIn: "2m" });
+		return jwt.sign({ id: userName }, this.JWT_SECRET, { expiresIn: "1h" });
 	}
 
 	public verifyToken(token: string): any {
