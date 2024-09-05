@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
 	cors({
-		origin: "*",
+		origin: 'https://project-account-1.onrender.com',
 		credentials: true,
 	})
 );
