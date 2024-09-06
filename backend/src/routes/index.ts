@@ -13,7 +13,8 @@ router.use("/register", register);
 router.use("/login", login);
 
 //protegida
-router.use("/home", authenticateToken.protected, home);
+//router.use("/home", authenticateToken.protected, home);
+router.use("/home", home);
 
 export { router };
 

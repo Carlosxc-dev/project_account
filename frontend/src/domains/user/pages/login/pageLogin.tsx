@@ -31,6 +31,7 @@ export default function Login() {
         auth: {
           token: parseResp.token,
           type: "Bearer",
+          
         },
         userState: {
           userId: parseResp.data.id,
